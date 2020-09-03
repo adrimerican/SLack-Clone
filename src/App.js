@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './App.css';
 
-import Toolbar from './components/Toolbar'
-import SideDrawer from './components/SideDrawer'
-import Backdrop from './components/Backdrop'
+import Toolbar from './components/Toolbar/Toolbar'
+import SideDrawer from './components/SideDrawer/SideDrawer'
+import Backdrop from './components/Backdrop/Backdrop'
 
 class App extends React.Component {
 //Previous group messages stored as state 
