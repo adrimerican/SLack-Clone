@@ -40,6 +40,30 @@ class App extends React.Component {
     })
   }
 
+   //This is when the SideDrawer is closed waiting to be opened.
+   state = {
+    sideDrawerOpen: false,
+  }
+
+  drawerToggleClickHandler = () => {
+    this.setState(prevState => {
+      return { sideDrawerOpen: !prevState.sideDrawerOpen }
+    })
+  }
+
+  backdropClickHandler = () => {
+    this.setState({ sideDrawerOpen: false })
+  }
+}
+
+  render() {
+    let backdrop;
+
+    if (this.state.sideDrawerOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />;
+    }
+  
+
   render() {
     //renders the hard coded mesages from the array and delete/save message buttons
     const allMessages =  this.state.Messages.map( (sentMessage, index) => {
@@ -61,29 +85,10 @@ class App extends React.Component {
         </div>
 
       </>
-    )
-  }
-}
+  
 
-
-class App extends Component {
-  //This is when the SideDrawer is closed waiting to be opened.
-    state = {
-    sideDrawerOpen: false,
-  }
-
-  drawerToggleClickHandler = () => {
-    this.setState(prevState => {
-      return { sideDrawerOpen: !prevState.sideDrawerOpen }
-    })
-  }
-
-  backdropClickHandler = () => {
-    this.setState({ sideDrawerOpen: false })
-  }
-
-  render() {
-    let backdrop;
+    {
+      let backdrop;
 
     if (this.state.sideDrawerOpen) {
       backdrop = <Backdrop click={this.backdropClickHandler} />;
