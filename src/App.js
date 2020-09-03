@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './App.css';
 
-import Toolbar from './components/Toolbar/Toolbar'
-import SideDrawer from './components/SideDrawer/SideDrawer'
-import Backdrop from './components/Backdrop/Backdrop'
+import Toolbar from './components/NavBar'
+import SideDrawer from './components/SideDrawer'
+import Backdrop from './components/Backdrop'
 
 class App extends React.Component {
 //Previous group messages stored as state 
@@ -14,6 +14,7 @@ class App extends React.Component {
       {message: "What are we doing today"},
       ],
       newMessage: '',
+      sideDrawerOpen: false,
       
   }
   //enters a new message from the input using a class component
@@ -40,6 +41,17 @@ class App extends React.Component {
     })
   }
 
+  drawerToggleClickHandler = () => {
+    this.setState(prevState => {
+      return { sideDrawerOpen: !prevState.sideDrawerOpen }
+    })
+  }
+
+  backdropClickHandler = () => {
+    this.setState({ sideDrawerOpen: false })
+  }
+
+
   render() {
     //renders the hard coded mesages from the array and delete/save message buttons
     const allMessages =  this.state.Messages.map( (sentMessage, index) => {
@@ -47,6 +59,11 @@ class App extends React.Component {
       <button onClick={this.deleteMessage}>Delete</button>
       <button onClick={this.saveMessage}>Save Message</button></p>
     })
+    let backdrop;
+
+    if (this.state.sideDrawerOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />;
+    }
     return( 
     // Div to display sent messages and new message input box/enter button
       <>
@@ -59,37 +76,7 @@ class App extends React.Component {
           />
           <button onClick={this.sendMessage}>Enter</button>
         </div>
-
-      </>
-    )
-  }
-}
-
-
-class App extends Component {
-  //This is when the SideDrawer is closed waiting to be opened.
-    state = {
-    sideDrawerOpen: false,
-  }
-
-  drawerToggleClickHandler = () => {
-    this.setState(prevState => {
-      return { sideDrawerOpen: !prevState.sideDrawerOpen }
-    })
-  }
-
-  backdropClickHandler = () => {
-    this.setState({ sideDrawerOpen: false })
-  }
-
-  render() {
-    let backdrop;
-
-    if (this.state.sideDrawerOpen) {
-      backdrop = <Backdrop click={this.backdropClickHandler} />;
-    }
-    return (
-      <div style={{height: '100%'}}>
+        <div style={{height: '100%'}}>
         <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
         <SideDrawer show={this.state.sideDrawerOpen} />
         {backdrop}
@@ -97,9 +84,45 @@ class App extends Component {
           <p>This is the page content!</p>
         </main>
       </div>
-    );
+      </>
+    )
   }
 }
+export default App;
 
+// class App extends Component {
+  //This is when the SideDrawer is closed waiting to be opened.
+  //   state = {
+  //   sideDrawerOpen: false,
+  // }
+
+  // drawerToggleClickHandler = () => {
+  //   this.setState(prevState => {
+  //     return { sideDrawerOpen: !prevState.sideDrawerOpen }
+  //   })
+  // }
+
+  // backdropClickHandler = () => {
+  //   this.setState({ sideDrawerOpen: false })
+  // }
+
+//   render() {
+//     let backdrop;
+
+//     if (this.state.sideDrawerOpen) {
+//       backdrop = <Backdrop click={this.backdropClickHandler} />;
+//     }
+//     return (
+//       <div style={{height: '100%'}}>
+//         <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
+//         <SideDrawer show={this.state.sideDrawerOpen} />
+//         {backdrop}
+//         <main style={{ marginTop: '64px' }}>s
+//           <p>This is the page content!</p>
+//         </main>
+//       </div>
+//     );
+//   }
+// }
 
 export default App;
