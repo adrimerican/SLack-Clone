@@ -18,6 +18,8 @@ class App extends React.Component {
       ],
   //sends a  new mesage with a new user name
       newUser: "Pete", 
+  // emtpy string for a new message  
+      newMessage: '', 
   // direct messge stored as state
   directMessage: [
     {dMessage: "Direct message"},
@@ -25,7 +27,7 @@ class App extends React.Component {
     newDMessage: '',
   // emtpy string for a new message    
       newMessage: '', 
-      sideDrawerOpen: false, 
+     sideDrawerOpen: false, 
   }
 
 
