@@ -18,6 +18,11 @@ class App extends React.Component {
       ],
   //sends a  new mesage with a new user name
       newUser: "Pete", 
+  // direct messge stored as state
+  directMessage: [
+    {dMessage: "Direct message"},
+    ], 
+    newDMessage: '',
   // emtpy string for a new message    
       newMessage: '', 
       sideDrawerOpen: false, 
@@ -29,6 +34,7 @@ class App extends React.Component {
     this.setState ({
       ...this.state,
       newMessage: event.target.value,
+      newdMessage: event.target.value,
     })
   }
   //sends a message from the enter button using a class component
@@ -36,7 +42,8 @@ class App extends React.Component {
     event.preventDefault()
     this.setState ({
       ...this.state,
-      Messages: [...this.state.Messages, {message: this.state.newMessage, name: this.state.newUser}]
+      Messages: [...this.state.Messages, {message: this.state.newMessage, name: this.state.newUser}],
+      directMessage: [...this.state.directMessage, {dMessage: this.state.newdMessage}]
     })
   }
   //deletes messages using a button
@@ -69,6 +76,11 @@ class App extends React.Component {
       <button onClick={this.saveMessage}>Save Message</button>
       </p>
       }) 
+  // renders hard coded direct messages 
+      const allDirectMessage =  this.state.directMessage.map ( (sentDirectMessage, index1) => {
+      return <p className="alexMessage" key={index1}>{sentDirectMessage.dMessage}
+      </p>
+      })     
     let backdrop;
 
     if (this.state.sideDrawerOpen) {
@@ -95,6 +107,15 @@ class App extends React.Component {
           <p>This is the page content!</p>
         </main>
       </div>
+      <div className="messageUser">
+            <h1>Direct Messages</h1>
+                <h3>Pete</h3> 
+                {allDirectMessage}
+                <input className="inputBox" type="text" name="newMessage" placeholder="Enter a message"
+                onChange={this.enterMessage}
+                />
+                <button onClick={this.sendMessage}>Enter</button>
+        </div> 
       </>
     )
   }
