@@ -5,6 +5,9 @@ import Toolbar from './components/NavBar'
 import SideDrawer from './components/SideDrawer'
 import Backdrop from './components/Backdrop'
 
+//User image
+import user from './images/userimage.png'
+
 class App extends React.Component {
 //Previous group messages stored as state 
   state = {
@@ -13,10 +16,14 @@ class App extends React.Component {
       {message: "I'm fine thank you"},
       {message: "What are we doing today"},
       ],
-      newMessage: '',
-      sideDrawerOpen: false,
-      
+  //sends a  new mesage with a new user name
+      newUser: "Pete", 
+  // emtpy string for a new message    
+      newMessage: '', 
+      sideDrawerOpen: false, 
   }
+
+
   //enters a new message from the input using a class component
   enterMessage = (event) => {
     this.setState ({
@@ -29,7 +36,7 @@ class App extends React.Component {
     event.preventDefault()
     this.setState ({
       ...this.state,
-      Messages: [...this.state.Messages, {message: this.state.newMessage}]
+      Messages: [...this.state.Messages, {message: this.state.newMessage, name: this.state.newUser}]
     })
   }
   //deletes messages using a button
@@ -53,12 +60,15 @@ class App extends React.Component {
 
 
   render() {
-    //renders the hard coded mesages from the array and delete/save message buttons
+  //renders the hard coded mesages from the array and delete/save message buttons and sends user image and name every time a message is sent 
     const allMessages =  this.state.Messages.map( (sentMessage, index) => {
-      return <p key={index}>{sentMessage.message} 
+      return <p key={index}> <img src={user} alt="userIMG" width="40" /> 
+      <h3>{sentMessage.name}</h3> 
+      {sentMessage.message} 
       <button onClick={this.deleteMessage}>Delete</button>
-      <button onClick={this.saveMessage}>Save Message</button></p>
-    })
+      <button onClick={this.saveMessage}>Save Message</button>
+      </p>
+      }) 
     let backdrop;
 
     if (this.state.sideDrawerOpen) {
@@ -68,6 +78,7 @@ class App extends React.Component {
     // Div to display sent messages and new message input box/enter button
       <>
         <div className="messageDisplay">
+        <h1>General</h1>
           {allMessages}
         </div>
         <div className="messageInput">
