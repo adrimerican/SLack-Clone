@@ -86,7 +86,7 @@ class App extends React.Component {
   render() {
     //renders the hard coded mesages from the array and delete/save message buttons
     const allMessages =  this.state.Messages.map( (sentMessage, index) => {
-      return <p key={index}>{sentMessage.message} 
+      return <p key={index}>{sentMessage.message} <img src={user} alt="userIMG" width="40" /> 
       <button onClick={this.deleteMessage}>Delete</button>
       <button onClick={this.saveMessage}>Save Message</button></p>
     })
